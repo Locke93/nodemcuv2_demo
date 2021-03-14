@@ -1,6 +1,11 @@
 # nodemcuv2_demo
 A demo ui lib for NodeMCU/ESP8266, base on the [U8G2](https://github.com/olikraus/u8g2)
 
+### Why use it
+* Quickly to finish the UI development base on the U8G2
+* High scalability
+* Support animation
+
 ### Implemented:
 * TextView
 * ImageView
@@ -44,7 +49,7 @@ void loop() {
 
 
 ### Licence
-> Copyright [locken] [1072174696@qq.com]
+> Copyright [lcokean] [1072174696@qq.com]
 >
 > Licensed under the Apache License, Version 2.0 (the "License");
 > you may not use this file except in compliance with the License.
