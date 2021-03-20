@@ -19,7 +19,7 @@ U8G2_SSD1306_128X32_UNIVISION_1_SW_I2C u8g2(U8G2_R2, CLOCK_PIN, DATA_PIN, RESET_
 
 void setup() {
     UiThread *uiThread = ThreadManager::getInstance()->getUiThread();
-    uiThread->init(u8g2);
+    uiThread->init(&u8g2);
     auto *rootView = new ViewGroup();
     createView(rootView);
     uiThread->setRootView(reinterpret_cast<View *>(rootView));
@@ -37,13 +37,6 @@ void createView(ViewGroup *rootView) {
     reinterpret_cast<Animation *>(animation)->setDuration(3000);
     reinterpret_cast<Animation *>(animation)->setReverse(true);
     animation->start();
-}
-```
-
-3. Forward the system clock loop
-```c++
-void loop() {
-    ThreadManager::getInstance()->async();
 }
 ```
 
