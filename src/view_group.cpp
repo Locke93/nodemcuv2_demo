@@ -13,8 +13,8 @@ void ViewGroup::addView(View *view, int index) {
     this->childs.insert(itr, index, view);
 }
 
-void ViewGroup::onDraw(U8G2 u8g2) {
-    for (View *v: this->childs) {
+void ViewGroup::onDraw(U8G2 *u8g2) const {
+    for (const View *v: this->childs) {
         v->onDraw(u8g2);
     }
 }

@@ -6,16 +6,17 @@
 #define NODEMCUV2_ANIMATION_H
 
 #include <cstdint>
-#include "thread.h"
 #include "thread_manager.h"
+#include "ui_thread.h"
+#include "ui_component.h"
 
 class Animation {
+private:
+    UiComponent *component = nullptr;
 protected:
     uint32_t duration = 0;
     bool isRepeat = true;
     bool reverse = false;
-    Thread *thread = nullptr;
-
     virtual void onUpdate(float progress) = 0;
 protected:
     ~Animation();
@@ -26,14 +27,14 @@ public:
     virtual bool start();
     virtual bool stop();
 
-    class AnimationThread : Thread {
+    class AnimationComponent : UiComponent {
     private:
         Animation *parent;
-        uint32_t *startTime;
+        uint32_t startTime;
     protected:
-        ~AnimationThread() override;
+        ~AnimationComponent() override;
     public:
-        explicit AnimationThread(Animation *animation);
+        explicit AnimationComponent(Animation *animation);
         void async(const uint32_t *timestamp) override;
     };
 };

@@ -18,7 +18,7 @@ public:
 
     void setText(const char *text);
 
-    void onDraw(U8G2 u8g2) override;
+    void onDraw(U8G2 *u8g2) const override;
 };
 
 #endif //NODEMCUV2_TEXT_VIEW_H

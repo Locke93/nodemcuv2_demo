@@ -19,7 +19,7 @@ public:
 
     void addView(View *view, int index);
 
-    void onDraw(U8G2 u8g2) override;
+    void onDraw(U8G2 *u8g2) const override;
 };
 
 #endif //NODEMCUV2_VIEW_GROUP_H

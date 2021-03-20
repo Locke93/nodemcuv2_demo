@@ -6,19 +6,26 @@
 #define NODEMCUV2_UI_THREAD_H
 
 #include <U8g2lib.h>
-#include "thread.h"
+#include <list>
+#include <Ticker.h>
 #include "renderer.h"
 #include "view.h"
+#include "ui_component.h"
 
-class UiThread : Thread {
+class UiThread {
 private:
     View *root = nullptr;
     Renderer *renderer = nullptr;
+    Ticker ticker;
+    std::list<UiComponent *> components;
+    void async();
 public:
     UiThread() = default;
-    void init(U8G2 u8g2);
+    ~UiThread();
+    void init(U8G2 *u8g2);
     void setRootView(View *view);
-    void async(const uint32_t *timestamp) override;
+    void attachComponent(UiComponent *component);
+    void detachComponent(UiComponent *component);
 };
 
 #endif //NODEMCUV2_UI_THREAD_H

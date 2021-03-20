@@ -15,24 +15,8 @@ ThreadManager *ThreadManager::getInstance(void) {
 
 ThreadManager::ThreadManager() {
     this->uiThread = new UiThread();
-    this->threads.push_back(reinterpret_cast<Thread *>(this->uiThread));
 }
 
 UiThread *ThreadManager::getUiThread() {
     return this->uiThread;
-}
-
-void ThreadManager::registerThread(Thread *thread) {
-    this->threads.push_back(thread);
-}
-
-void ThreadManager::unregisterThread(Thread *thread) {
-    this->threads.remove(thread);
-}
-
-void ThreadManager::async() {
-    uint32_t now = micros() / 1000;
-    for (Thread *thread: this->threads) {
-        thread->async(&now);
-    }
 }

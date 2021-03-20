@@ -17,7 +17,7 @@ public:
         this->positionX = x;
         this->positionY = y;
     }
-    virtual void onDraw(U8G2 u8g2) = 0;
+    virtual void onDraw(U8G2 *u8g2) const = 0;
 };
 
 #endif //NODEMCUV2_VIEW_H

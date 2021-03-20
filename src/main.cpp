@@ -64,13 +64,16 @@ void createView(ViewGroup *rootView) {
 }
 
 void setup() {
+    Serial.begin(9600);
+    Serial.println("======== setup =========");
     UiThread *uiThread = ThreadManager::getInstance()->getUiThread();
-    uiThread->init(u8g2);
+    uiThread->init(&u8g2);
     auto *rootView = new ViewGroup();
     createView(rootView);
     uiThread->setRootView(reinterpret_cast<View *>(rootView));
 }
 
 void loop() {
-    ThreadManager::getInstance()->async();
+    Serial.println("======== loop =========");
+    delay(100L);
 }

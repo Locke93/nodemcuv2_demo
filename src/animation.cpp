@@ -18,44 +18,42 @@ void Animation::setReverse(bool reverse) {
 }
 
 bool Animation::start() {
-    if (this->thread != nullptr) return false;
-    this->thread = reinterpret_cast<Thread *>(new Animation::AnimationThread(this));
-    ThreadManager::getInstance()->registerThread(this->thread);
+    if (this->component != nullptr) return false;
+    this->component = reinterpret_cast<UiComponent *>(new Animation::AnimationComponent(this));
+    ThreadManager::getInstance()->getUiThread()->attachComponent(this->component);
     return true;
 }
 
 bool Animation::stop() {
-    if (this->thread == nullptr) return false;
-    ThreadManager::getInstance()->unregisterThread(this->thread);
-    delete this->thread;
-    this->thread = nullptr;
+    if (this->component == nullptr) return false;
+    ThreadManager::getInstance()->getUiThread()->detachComponent(this->component);
+    delete this->component;
+    this->component = nullptr;
     return true;
 }
 
 Animation::~Animation() {
-    stop();
+    Animation::stop();
 }
 
-Animation::AnimationThread::AnimationThread(Animation *animation) {
+Animation::AnimationComponent::AnimationComponent(Animation *animation) {
     this->parent = animation;
-    uint32_t now = micros() / 1000;
-    this->startTime = &now;
+    this->startTime = micros() / 1000;
 }
 
-Animation::AnimationThread::~AnimationThread() {
-    delete this->startTime;
-    this->startTime = nullptr;
+Animation::AnimationComponent::~AnimationComponent() {
     this->parent = nullptr;
 }
 
-void Animation::AnimationThread::async(const uint32_t *timestamp) {
-    uint32_t diff = *timestamp - *(this->startTime);
+void Animation::AnimationComponent::async(const uint32_t *timestamp) {
+    uint32_t diff = *timestamp - (this->startTime);
     uint32_t durationInMs = this->parent->duration;
     bool isOvertime = diff > durationInMs;
     if (isOvertime && !parent->isRepeat) {
         parent->stop();
     } else {
-        float progress = (diff % durationInMs) / (float) durationInMs;
+        auto time = diff % durationInMs;
+        float progress = time / (float) durationInMs;
         if (isOvertime && this->parent->reverse && (diff / durationInMs) % 2 != 0) {
             parent->onUpdate(1.0f - progress);
         } else {
