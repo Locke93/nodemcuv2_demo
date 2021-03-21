@@ -9,7 +9,7 @@ Renderer::Renderer(U8G2 *u8g2) {
     this->u8g2 = u8g2;
 }
 
-void Renderer::draw(const View *view) {
+void Renderer::draw(View *view) {
     this->u8g2->firstPage();
     do {
         view->onDraw(this->u8g2);

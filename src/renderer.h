@@ -13,7 +13,7 @@ private:
     U8G2 *u8g2;
 public:
     Renderer(U8G2 *u8g2);
-    void draw(const View *view);
+    void draw(View *view);
 };
 
 #endif //NODEMCUV2_RENDERER_H

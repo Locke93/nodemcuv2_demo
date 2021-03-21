@@ -12,7 +12,7 @@ void TextView::setText(const char *text) {
     this->text = text;
 }
 
-void TextView::onDraw(U8G2 *u8g2) const {
+void TextView::onDraw(U8G2 *u8g2) {
     u8g2->setFont(this->font);
     u8g2->drawStr(this->positionX, this->positionY, this->text);
 }

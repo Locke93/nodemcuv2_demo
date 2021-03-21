@@ -15,7 +15,7 @@ private:
 public:
     ImageView() = default;
     void setImage(u8g2_uint_t w, u8g2_uint_t h, const uint8_t *bitmap);
-    void onDraw(U8G2 *u8g2) const override;
+    void onDraw(U8G2 *u8g2) override;
 };
 
 #endif //NODEMCUV2_IMAGE_VIEW_H

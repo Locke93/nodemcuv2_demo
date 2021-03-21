@@ -12,6 +12,7 @@
 #include "view_group.h"
 #include "text_view.h"
 #include "image_view.h"
+#include "gif_view.h"
 
 #define RESET_PIN U8X8_PIN_NONE
 #define CLOCK_PIN U8X8_PIN_D4
@@ -54,18 +55,27 @@ void createView(ViewGroup *rootView) {
     reinterpret_cast<Animation *>(animation1)->setReverse(true);
     animation1->start();
 
-    auto *imageView = new ImageView();
+    /*auto *imageView = new ImageView();
     imageView->setImage(32, 32, gif_1);
     rootView->addView(reinterpret_cast<View *>(imageView));
     auto animation2 = new TranslateAnimation(imageView, 48, 0, 96, 0);
+    reinterpret_cast<Animation *>(animation2)->setDuration(3000);
+    reinterpret_cast<Animation *>(animation2)->setReverse(true);
+    animation2->start();*/
+
+    auto *gifView = new GifView();
+    gifView->setImageSet(32, 32, {gif_1, gif_2});
+    gifView->setInterval(200);
+    rootView->addView(reinterpret_cast<View *>(gifView));
+    auto animation2 = new TranslateAnimation(gifView, 48, 0, 96, 0);
     reinterpret_cast<Animation *>(animation2)->setDuration(3000);
     reinterpret_cast<Animation *>(animation2)->setReverse(true);
     animation2->start();
 }
 
 void setup() {
-    Serial.begin(9600);
-    Serial.println("======== setup =========");
+    //Serial.begin(9600);
+    //Serial.println("======== setup =========");
     UiThread *uiThread = ThreadManager::getInstance()->getUiThread();
     uiThread->init(&u8g2);
     auto *rootView = new ViewGroup();
@@ -74,6 +84,6 @@ void setup() {
 }
 
 void loop() {
-    Serial.println("======== loop =========");
+    //Serial.println("======== loop =========");
     delay(100L);
 }

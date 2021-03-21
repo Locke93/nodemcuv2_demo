@@ -10,7 +10,7 @@ void ImageView::setImage(u8g2_uint_t w, u8g2_uint_t h, const uint8_t *bitmap) {
     this->bitmap = bitmap;
 }
 
-void ImageView::onDraw(U8G2 *u8g2) const {
+void ImageView::onDraw(U8G2 *u8g2) {
     if (this->bitmap == nullptr) return;
     u8g2->drawXBMP(this->positionX, this->positionY, this->width, this->height, this->bitmap);
 }
