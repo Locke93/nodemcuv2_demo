@@ -9,6 +9,7 @@ A demo ui lib for NodeMCU/ESP8266, base on the [U8G2](https://github.com/olikrau
 ### Implemented:
 * TextView
 * ImageView
+* GifView
 * TranslateAnimation
 
 
