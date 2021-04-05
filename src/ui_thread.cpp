@@ -4,7 +4,7 @@
 
 #include "ui_thread.h"
 
-#define SCREEN_FPS 30
+#define SCREEN_FPS 60
 
 void UiThread::init(U8G2 *u8g2) {
     this->renderer = new Renderer(u8g2);
