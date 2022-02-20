@@ -5,8 +5,8 @@
 #ifndef NODEMCUV2_TRANSLATE_ANIMATION_H
 #define NODEMCUV2_TRANSLATE_ANIMATION_H
 
-#include "animation.h"
-#include "view.h"
+#include "view/animation.h"
+#include "view/view.h"
 
 class TranslateAnimation : Animation {
 private:

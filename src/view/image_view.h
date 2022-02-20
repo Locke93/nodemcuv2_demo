@@ -5,7 +5,7 @@
 #ifndef NODEMCUV2_IMAGE_VIEW_H
 #define NODEMCUV2_IMAGE_VIEW_H
 
-#include "view.h"
+#include "view/view.h"
 
 class ImageView : public View {
 private:

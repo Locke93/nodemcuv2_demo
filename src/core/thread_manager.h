@@ -6,7 +6,7 @@
 #define NODEMCUV2_THREAD_MANAGER_H
 
 #include <iostream>
-#include "ui_thread.h"
+#include "core/ui_thread.h"
 
 class ThreadManager {
 private:

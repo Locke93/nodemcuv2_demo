@@ -7,7 +7,7 @@
 
 #include <cstdint>
 #include <initializer_list>
-#include "view.h"
+#include "view/view.h"
 
 class GifView : public View {
 private:

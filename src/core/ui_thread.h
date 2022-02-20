@@ -9,7 +9,7 @@
 #include <list>
 #include <Ticker.h>
 #include "renderer.h"
-#include "view.h"
+#include "view/view.h"
 #include "ui_component.h"
 
 class UiThread {

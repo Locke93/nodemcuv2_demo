@@ -6,9 +6,9 @@
 #define NODEMCUV2_ANIMATION_H
 
 #include <cstdint>
-#include "thread_manager.h"
-#include "ui_thread.h"
-#include "ui_component.h"
+#include "core/thread_manager.h"
+#include "core/ui_thread.h"
+#include "core/ui_component.h"
 
 class Animation {
 private:

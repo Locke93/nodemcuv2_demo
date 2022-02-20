@@ -7,12 +7,12 @@
 #include <Wire.h>
 #endif
 
-#include "thread_manager.h"
-#include "translate_animation.h"
-#include "view_group.h"
-#include "text_view.h"
-#include "image_view.h"
-#include "gif_view.h"
+#include "core/thread_manager.h"
+#include "view/translate_animation.h"
+#include "view/view_group.h"
+#include "view/text_view.h"
+#include "view/image_view.h"
+#include "view/gif_view.h"
 
 #define RESET_PIN U8X8_PIN_NONE
 #define CLOCK_PIN U8X8_PIN_D4

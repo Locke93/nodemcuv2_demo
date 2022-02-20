@@ -6,7 +6,7 @@
 #define NODEMCUV2_RENDERER_H
 
 #include <U8g2lib.h>
-#include "view.h"
+#include "view/view.h"
 
 class Renderer {
 private:

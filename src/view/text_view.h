@@ -5,7 +5,7 @@
 #ifndef NODEMCUV2_TEXT_VIEW_H
 #define NODEMCUV2_TEXT_VIEW_H
 
-#include "view.h"
+#include "view/view.h"
 
 class TextView : public View {
 private:
