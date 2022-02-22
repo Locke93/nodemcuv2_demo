@@ -4,8 +4,8 @@
 
 #include "weather_page.h"
 #include "../../view/text_view.h"
-#include "../network/http.h"
-
+#include "../network/http_request.h"
+#include "../network/http_manager.h"
 
 void WeatherPage::onCreate() {
     auto *textView = new TextView();
@@ -16,12 +16,14 @@ void WeatherPage::onCreate() {
 
     const char *host = "http://api.k780.com";
     const char *path = "/";
-    HttpConnection *httpConnect = new HttpConnection(host, path);
-    httpConnect->addQuery("app", "weather.today");
-    httpConnect->addQuery("weaId", "1");
-    httpConnect->addQuery("appkey", "10003");
-    httpConnect->addQuery("sign", "b59bc3ef6191eb9f747dd4e83c99f2a4");
-    httpConnect->addQuery("format", "json");
-    auto result = httpConnect->get();
-    Serial.println(result);
+    HttpRequest *request = new HttpRequest(host, path);
+    request->addQuery("app", "weather.today");
+    request->addQuery("weaId", "1");
+    request->addQuery("appkey", "10003");
+    request->addQuery("sign", "b59bc3ef6191eb9f747dd4e83c99f2a4");
+    request->addQuery("format", "json");
+    HttpManager::HttpCallback callback = [](const char *response) {
+        Serial.println(response);
+    };
+    HttpManager::getInstance()->addRequest(*request, callback);
 }

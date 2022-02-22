@@ -18,6 +18,8 @@ public:
 
     void launchScreenPageDelayed(ScreenPage *page, long delay);
 
+    void onLoop();
+
 private:
     ViewGroup *rootView = nullptr;
     Ticker ticker;

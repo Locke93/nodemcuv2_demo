@@ -4,6 +4,7 @@
 
 #include "application.h"
 #include "../core/thread_manager.h"
+#include "network/http_manager.h"
 
 Application *Application::sApplication = nullptr;
 
@@ -19,6 +20,10 @@ void Application::onCreate(U8G2 *u8g2) {
     uiThread->init(u8g2);
     rootView = new ViewGroup();
     uiThread->setRootView(reinterpret_cast<View *>(rootView));
+}
+
+void Application::onLoop() {
+    HttpManager::getInstance()->execute();
 }
 
 void Application::launchScreenPage(ScreenPage *page) {
