@@ -13,10 +13,20 @@ void WeatherPage::onCreate() {
     textView->setPosition(0, 20);
     textView->setFont(u8g2_font_8x13_tr);
     setContentView(textView);
+    requestLocation();
+    requestWeather();
+}
 
-    const char *host = "http://api.k780.com";
-    const char *path = "/";
-    HttpRequest *request = new HttpRequest(host, path);
+void WeatherPage::requestLocation() {
+    HttpRequest *request = new HttpRequest("https://ip.tool.lu", "/");
+    HttpManager::HttpCallback callback = [](const char *response) {
+        Serial.println(response);
+    };
+    HttpManager::getInstance()->addRequest(*request, callback);
+}
+
+void WeatherPage::requestWeather() {
+    HttpRequest *request = new HttpRequest("http://api.k780.com", "/");
     request->addQuery("app", "weather.today");
     request->addQuery("weaId", "1");
     request->addQuery("appkey", "10003");

@@ -8,4 +8,7 @@
 class WeatherPage : public ScreenPage {
 public:
     void onCreate() override;
+private:
+    void requestLocation();
+    void requestWeather();
 };
