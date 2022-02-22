@@ -18,3 +18,7 @@ void ViewGroup::onDraw(U8G2 *u8g2) {
         v->onDraw(u8g2);
     }
 }
+
+void ViewGroup::removeAllViews() {
+    this->childs.clear();
+}
