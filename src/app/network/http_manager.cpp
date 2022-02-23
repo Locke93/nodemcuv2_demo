@@ -35,4 +35,5 @@ void HttpManager::doRequest(HttpRequest &request, HttpCallback &callback) {
     } else {
         callback(nullptr);
     }
+    httpClient.end();
 }
