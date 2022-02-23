@@ -18,13 +18,13 @@ void WeatherPage::onCreate() {
     rooView->addView(textView);
 
     temView = new TextView();
-    temView->setText("10");
+    //temView->setText("10");
     temView->setPosition(80, 28);
     temView->setFont(u8g2_font_10x20_tr);
     rooView->addView(temView);
 
     cityView = new TextView();
-    cityView->setText("Xiamen");
+    //cityView->setText("Xiamen");
     cityView->setPosition(80, 8);
     cityView->setFont(u8g2_font_5x7_tr);
     rooView->addView(cityView);
@@ -47,12 +47,17 @@ void WeatherPage::requestWeather() {
         String text = getValueFromJson(*json, "text");
         String temperature = getValueFromJson(*json, "temperature");
 
-        Serial.println(text);
-        textView->setText(text.c_str());
-        Serial.println(temperature);
-        temView->setText(temperature.c_str());
-        Serial.println(city);
-        cityView->setText(city.c_str());
+        char *temp1 = new char[text.length() + 1];
+        text.toCharArray(temp1, text.length() + 1, 0);
+        textView->setText(temp1);
+
+        char *temp2 = new char[temperature.length() + 1];
+        temperature.toCharArray(temp2, temperature.length() + 1, 0);
+        temView->setText(temp2);
+
+        char *temp3 = new char[city.length() + 1];
+        city.toCharArray(temp3, city.length() + 1, 0);
+        cityView->setText(temp3);
     };
     HttpManager::getInstance()->addRequest(*request, callback);
 
