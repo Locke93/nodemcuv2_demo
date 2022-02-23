@@ -27,6 +27,7 @@ void HttpManager::execute() {
 }
 
 void HttpManager::doRequest(HttpRequest &request, HttpCallback &callback) {
+    wiFiClient.setInsecure();
     httpClient.begin(wiFiClient, request.toString());
     int code = httpClient.GET();
     if (code == HTTP_CODE_OK) {

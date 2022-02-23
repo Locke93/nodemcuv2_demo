@@ -8,6 +8,7 @@
 #include <memory>
 #include "http_request.h"
 #include <ESP8266HTTPClient.h>
+#include <WiFiClientSecure.h>
 
 
 class HttpManager {
@@ -29,6 +30,6 @@ private:
 
 private:
     HTTPClient httpClient;
-    WiFiClient wiFiClient;
+    WiFiClientSecure wiFiClient;
     std::queue<std::pair<HttpRequest, HttpCallback>> queue;
 };
