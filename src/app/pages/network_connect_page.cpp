@@ -5,14 +5,23 @@
 #include "network_connect_page.h"
 #include "weather_page.h"
 #include "../application.h"
+#include "../resources.h"
 #include "../local_properties.h"
 
 void NetworkConnectPage::onCreate() {
-    connTextView = new TextView();
-    connTextView->setText("conn wifi ...");
-    connTextView->setPosition(0, 20);
-    connTextView->setFont(u8g2_font_6x10_tr);
-    setContentView(connTextView);
+    ViewGroup *rootView = new ViewGroup();
+
+    iconView = new GifView();
+    iconView->setImageSet(32, 32, wifi_icon_gif);
+    iconView->setPosition(-4, 0);
+    iconView->setInterval(300);
+    rootView->addView(iconView);
+
+    textView = new TextView();
+    textView->setPosition(34, 22);
+    textView->setFont(u8g2_font_6x10_tr);
+    rootView->addView(textView);
+    setContentView(reinterpret_cast<View *>(rootView));
     // connect to network via WiFi
     connectToNetwork();
 }
@@ -32,10 +41,10 @@ void NetworkConnectPage::OnNetworkConnectionListener::onScan(std::vector<WifiEnd
 }
 
 void NetworkConnectPage::OnNetworkConnectionListener::onConnected(const char *ssid) {
-    parent->connTextView->setText(parent->connection->getIpAddress());
+    parent->textView->setText(parent->connection->getIpAddress());
     Application::getInstance()->launchScreenPageDelayed(new WeatherPage(), 2000);
 }
 
 void NetworkConnectPage::OnNetworkConnectionListener::onDisconnected(const char *ssid) {
-    parent->connTextView->setText("wifi disconnected");
+    parent->textView->setText("disconnected");
 }

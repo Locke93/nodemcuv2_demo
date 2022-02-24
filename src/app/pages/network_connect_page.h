@@ -3,6 +3,7 @@
 //
 
 #include "../screen_page.h"
+#include "../../view/gif_view.h"
 #include "../../view/text_view.h"
 #include "../network/wifi.h"
 
@@ -31,7 +32,8 @@ private:
     void connectToNetwork();
 
 private:
-    TextView *connTextView = nullptr;
+    GifView *iconView = nullptr;
+    TextView *textView = nullptr;
     std::shared_ptr<WifiConnection> connection;
     std::shared_ptr<OnNetworkConnectionListener> listener;
 };
