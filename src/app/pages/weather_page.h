@@ -5,9 +5,11 @@
 #include "../screen_page.h"
 #include "../../view/text_view.h"
 #include <string.h>
+#include <Ticker.h>
 
 class WeatherPage : public ScreenPage {
 public:
+    ~WeatherPage();
     void onCreate() override;
 
 private:
@@ -19,4 +21,5 @@ private:
     TextView *textView;
     TextView *temView;
     TextView *cityView;
+    Ticker ticker;
 };
