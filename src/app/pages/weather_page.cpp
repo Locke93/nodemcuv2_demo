@@ -42,13 +42,12 @@ void WeatherPage::requestWeather() {
     request->addQuery("unit", "c");
     request->addQuery("location", "ip");
     request->addQuery("key", APP_KEY);
-    HttpManager::HttpCallback callback = [this](const char *response) {
-        Serial.println(response);
-        std::string json = std::string(response);
-        std::string city = getValueFromJson(json, "name");
-        std::string text = getValueFromJson(json, "text");
-        std::string code = getValueFromJson(json, "code");
-        std::string temperature = getValueFromJson(json, "temperature");
+    HttpManager::HttpCallback callback = [this](const std::string &response) {
+        Serial.println(response.c_str());
+        std::string city = getValueFromJson(response, "name");
+        std::string text = getValueFromJson(response, "text");
+        std::string code = getValueFromJson(response, "code");
+        std::string temperature = getValueFromJson(response, "temperature");
 
         textView->setText(text);
         temView->setText(temperature);

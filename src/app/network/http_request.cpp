@@ -4,13 +4,13 @@
 
 #include "http_request.h"
 
-HttpRequest::HttpRequest(const char *host, const char *path) {
+HttpRequest::HttpRequest(const std::string &host, const std::string &path) {
     request = host;
     request += path;
 }
 
-void HttpRequest::addQuery(const char *key, const char *value) {
-    if (request.lastIndexOf('?') < 0) {
+void HttpRequest::addQuery(const std::string &key, const std::string &value) {
+    if (request.find_last_of('?') == std::string::npos) {
         request += '?';
     } else {
         request += '&';
@@ -20,6 +20,6 @@ void HttpRequest::addQuery(const char *key, const char *value) {
     request += value;
 }
 
-String HttpRequest::toString() {
+std::string HttpRequest::toString() {
     return request;
 }

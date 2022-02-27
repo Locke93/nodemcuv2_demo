@@ -4,17 +4,17 @@
 
 #pragma once
 
-#include <iostream>
-#include <ESP8266HTTPClient.h>
+#include <string>
 
 class HttpRequest {
 
 public:
-    HttpRequest(const char *host, const char *path);
+    HttpRequest(const std::string &host, const std::string &path);
 
-    void addQuery(const char *key, const char *value);
+    void addQuery(const std::string &key, const std::string &value);
 
-    String toString();
+    std::string toString();
+
 private:
-    String request;
+    std::string request;
 };

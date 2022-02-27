@@ -9,10 +9,10 @@
 
 class WifiEndpoint {
 public:
-    const char *ssid = nullptr;
+    std::string ssid;
     bool open = false;
 public:
-    WifiEndpoint(const char *ssid, const bool open) {
+    WifiEndpoint(const std::string &ssid, const bool open) {
         this->ssid = ssid;
         this->open = open;
     }
@@ -32,7 +32,7 @@ private:
     std::weak_ptr<OnWifiConnectionListener> _listener;
     bool _isConnected = false;
     std::shared_ptr<WifiEndpoint> _activeEndpoint = nullptr;
-    const char *_ipAddress = nullptr;
+    std::string _ipAddress;
     Ticker _ticker;
 public:
 
@@ -42,7 +42,7 @@ public:
 
     void scan();
 
-    void connect(const char *ssid, const char *password);
+    void connect(const std::string &ssid, const std::string &password);
 
     void disconnect();
 
@@ -50,7 +50,7 @@ public:
 
     WifiEndpoint *getActiveEndpoint();
 
-    const char *getIpAddress();
+    std::string getIpAddress();
 
 private:
     void onCheckConnectionState();

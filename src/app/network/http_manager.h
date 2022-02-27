@@ -14,7 +14,7 @@
 class HttpManager {
 
 public:
-    typedef std::function<void(const char *response)> HttpCallback;
+    typedef std::function<void(const std::string &response)> HttpCallback;
 
 private:
     static HttpManager *sHttpManager;
