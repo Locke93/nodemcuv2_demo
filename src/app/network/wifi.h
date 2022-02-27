@@ -5,6 +5,7 @@
 #include <vector>
 #include <Ticker.h>
 #include <memory>
+#include <string>
 
 class WifiEndpoint {
 public:
@@ -21,9 +22,9 @@ class OnWifiConnectionListener {
 public:
     virtual void onScan(std::vector<WifiEndpoint> endpoints) = 0;
 
-    virtual void onConnected(const char *ssid) = 0;
+    virtual void onConnected(const std::string &ssid) = 0;
 
-    virtual void onDisconnected(const char *ssid) = 0;
+    virtual void onDisconnected(const std::string &ssid) = 0;
 };
 
 class WifiConnection {

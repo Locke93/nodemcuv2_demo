@@ -2,6 +2,8 @@
 // Created by Locke Peng on 2022/2/21.
 //
 
+#include <memory>
+#include <string>
 #include "../screen_page.h"
 #include "../../view/gif_view.h"
 #include "../../view/text_view.h"
@@ -16,9 +18,9 @@ class NetworkConnectPage : public ScreenPage {
     public:
         void onScan(std::vector<WifiEndpoint> endpoints) override;
 
-        void onConnected(const char *ssid) override;
+        void onConnected(const std::string &ssid) override;
 
-        void onDisconnected(const char *ssid) override;
+        void onDisconnected(const std::string &ssid) override;
 
     private:
         NetworkConnectPage *parent;
@@ -32,8 +34,8 @@ private:
     void connectToNetwork();
 
 private:
-    GifView *iconView = nullptr;
-    TextView *textView = nullptr;
+    std::shared_ptr<GifView> iconView = nullptr;
+    std::shared_ptr<TextView> textView = nullptr;
     std::shared_ptr<WifiConnection> connection;
     std::shared_ptr<OnNetworkConnectionListener> listener;
 };

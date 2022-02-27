@@ -3,18 +3,20 @@
 //
 
 #pragma once
+
+#include <memory>
 #include "../view/view.h"
 #include "../view/view_group.h"
 
 class ScreenPage {
 public:
-    const void onCreate(ViewGroup *rootView);
+    const void onCreate(std::shared_ptr<ViewGroup> rootView);
 
     virtual void onCreate() = 0;
 
 protected:
-    void setContentView(View *view);
+    void setContentView(std::shared_ptr<View> view);
 
 private:
-    ViewGroup *rootView;
+    std::shared_ptr<ViewGroup> rootView;
 };

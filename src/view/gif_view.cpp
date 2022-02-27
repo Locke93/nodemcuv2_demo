@@ -4,6 +4,13 @@
 
 #include "gif_view.h"
 
+GifView::~GifView() {
+    if (this->bitmaps.size() == 0) return;
+    for (auto iter = bitmaps.begin(); iter != bitmaps.end(); iter++) {
+        delete[] iter;
+    }
+}
+
 void GifView::setInterval(uint16_t t) {
     this->interval = t;
 }

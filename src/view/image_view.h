@@ -14,7 +14,11 @@ private:
     const uint8_t *bitmap = nullptr;
 public:
     ImageView() = default;
+
+    ~ImageView();
+
     void setImage(u8g2_uint_t w, u8g2_uint_t h, const uint8_t *bitmap);
+
     void onDraw(U8G2 *u8g2) override;
 };
 

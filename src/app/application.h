@@ -5,6 +5,7 @@
 #include "screen_page.h"
 #include "../view/view_group.h"
 #include <Ticker.h>
+#include <memory>
 
 class Application {
 private:
@@ -14,13 +15,14 @@ public:
 
     void onCreate(U8G2 *u8g2);
 
-    void launchScreenPage(ScreenPage *page);
+    void launchScreenPage(std::shared_ptr<ScreenPage> page);
 
-    void launchScreenPageDelayed(ScreenPage *page, long delay);
+    void launchScreenPageDelayed(std::shared_ptr<ScreenPage> page, long delay);
 
     void onLoop();
 
 private:
-    ViewGroup *rootView = nullptr;
+    std::shared_ptr<ViewGroup> rootView = nullptr;
+    std::shared_ptr<ScreenPage> activePage = nullptr;
     Ticker ticker;
 };

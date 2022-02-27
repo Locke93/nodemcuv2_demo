@@ -4,12 +4,12 @@
 
 #include "screen_page.h"
 
-const void ScreenPage::onCreate(ViewGroup *root) {
+const void ScreenPage::onCreate(std::shared_ptr<ViewGroup> root) {
     this->rootView = root;
     this->onCreate();
 }
 
-void ScreenPage::setContentView(View *view) {
+void ScreenPage::setContentView(std::shared_ptr<View> view) {
     this->rootView->addView(view);
 }
 

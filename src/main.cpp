@@ -7,6 +7,7 @@
 #include <Wire.h>
 #endif
 
+#include <memory>
 #include "app/application.h"
 #include "app/pages/network_connect_page.h"
 
@@ -20,7 +21,8 @@ void setup() {
     Serial.begin(115200);
     Serial.println("======== setup =========");
     Application::getInstance()->onCreate(&u8g2);
-    Application::getInstance()->launchScreenPage(new NetworkConnectPage());
+    auto network = std::make_shared<NetworkConnectPage>();
+    Application::getInstance()->launchScreenPage(network);
 }
 
 void loop() {

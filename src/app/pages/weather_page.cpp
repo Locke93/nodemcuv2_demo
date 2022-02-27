@@ -12,24 +12,24 @@ WeatherPage::~WeatherPage() {
 }
 
 void WeatherPage::onCreate() {
-    ViewGroup *rooView = new ViewGroup();
+    std::shared_ptr<ViewGroup> rooView = std::make_shared<ViewGroup>();
 
-    textView = new TextView();
+    textView = std::make_shared<TextView>();
     textView->setText("...");
     textView->setPosition(0, 20);
     textView->setFont(u8g2_font_8x13_tr);
     rooView->addView(textView);
 
-    temView = new TextView();
+    temView = std::make_shared<TextView>();
     temView->setPosition(80, 28);
     temView->setFont(u8g2_font_10x20_tr);
     rooView->addView(temView);
 
-    cityView = new TextView();
+    cityView = std::make_shared<TextView>();
     cityView->setPosition(80, 8);
     cityView->setFont(u8g2_font_5x7_tr);
     rooView->addView(cityView);
-    setContentView(reinterpret_cast<View *>(rooView));
+    setContentView(std::static_pointer_cast<View>(rooView));
 
     ticker.attach(60 * 15, std::bind(&WeatherPage::requestWeather, this));
     requestWeather();
@@ -44,32 +44,24 @@ void WeatherPage::requestWeather() {
     request->addQuery("key", APP_KEY);
     HttpManager::HttpCallback callback = [this](const char *response) {
         Serial.println(response);
-        String *json = new String(response);
-        String city = getValueFromJson(*json, "name");
-        String text = getValueFromJson(*json, "text");
-        String code = getValueFromJson(*json, "code");
-        String temperature = getValueFromJson(*json, "temperature");
+        std::string json = std::string(response);
+        std::string city = getValueFromJson(json, "name");
+        std::string text = getValueFromJson(json, "text");
+        std::string code = getValueFromJson(json, "code");
+        std::string temperature = getValueFromJson(json, "temperature");
 
-        char *temp1 = new char[text.length() + 1];
-        text.toCharArray(temp1, text.length() + 1, 0);
-        textView->setText(temp1);
-
-        char *temp2 = new char[temperature.length() + 1];
-        temperature.toCharArray(temp2, temperature.length() + 1, 0);
-        temView->setText(temp2);
-
-        char *temp3 = new char[city.length() + 1];
-        city.toCharArray(temp3, city.length() + 1, 0);
-        cityView->setText(temp3);
+        textView->setText(text);
+        temView->setText(temperature);
+        cityView->setText(city);
     };
     HttpManager::getInstance()->addRequest(*request, callback);
 }
 
-String WeatherPage::getValueFromJson(const String &json, const String &key) {
-    int begin = json.indexOf(key + "\":\"");
+std::string WeatherPage::getValueFromJson(const std::string &json, const std::string &key) {
+    int begin = json.find(key + "\":\"");
     if (begin < 0) return "";
     begin += key.length() + 3;
-    int end = json.indexOf("\"", begin);
+    int end = json.find("\"", begin);
     if (end < 0 || end <= begin) return "";
-    return json.substring(begin, end);
+    return json.substr(begin, end - begin);
 }

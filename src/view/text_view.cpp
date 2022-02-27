@@ -8,14 +8,14 @@ void TextView::setFont(const uint8_t *font) {
     this->font = font;
 }
 
-void TextView::setText(const char *text) {
+void TextView::setText(const std::string &text) {
     this->text = text;
 }
 
 void TextView::onDraw(U8G2 *u8g2) {
-    if (this->text == nullptr) return;
+    if (this->text.length() == 0) return;
     u8g2->setFont(this->font);
-    u8g2->drawStr(this->positionX, this->positionY, this->text);
+    u8g2->drawStr(this->positionX, this->positionY, this->text.c_str());
 }
 
 

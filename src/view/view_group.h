@@ -7,17 +7,18 @@
 
 #include <iostream>
 #include <list>
+#include <memory>
 #include "view.h"
 
-class ViewGroup : View {
+class ViewGroup : public View {
 private:
-    std::list<View *> childs;
+    std::list<std::shared_ptr<View>> childs;
 public:
     ViewGroup() = default;
 
-    void addView(View *view);
+    void addView(std::shared_ptr<View> view);
 
-    void addView(View *view, int index);
+    void addView(std::shared_ptr<View> view, int index);
 
     void onDraw(U8G2 *u8g2) override;
 

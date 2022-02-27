@@ -9,19 +9,19 @@
 #include "../local_properties.h"
 
 void NetworkConnectPage::onCreate() {
-    ViewGroup *rootView = new ViewGroup();
+    std::shared_ptr<ViewGroup> rootView = std::make_shared<ViewGroup>();
 
-    iconView = new GifView();
+    iconView = std::make_shared<GifView>();
     iconView->setImageSet(32, 32, wifi_icon_gif);
     iconView->setPosition(-4, 0);
     iconView->setInterval(300);
     rootView->addView(iconView);
 
-    textView = new TextView();
+    textView = std::make_shared<TextView>();
     textView->setPosition(34, 22);
     textView->setFont(u8g2_font_6x10_tr);
     rootView->addView(textView);
-    setContentView(reinterpret_cast<View *>(rootView));
+    setContentView(std::static_pointer_cast<View>(rootView));
     // connect to network via WiFi
     connectToNetwork();
 }
@@ -40,11 +40,12 @@ NetworkConnectPage::OnNetworkConnectionListener::OnNetworkConnectionListener(Net
 void NetworkConnectPage::OnNetworkConnectionListener::onScan(std::vector<WifiEndpoint> endpoints) {
 }
 
-void NetworkConnectPage::OnNetworkConnectionListener::onConnected(const char *ssid) {
+void NetworkConnectPage::OnNetworkConnectionListener::onConnected(const std::string &ssid) {
     parent->textView->setText(parent->connection->getIpAddress());
-    Application::getInstance()->launchScreenPageDelayed(new WeatherPage(), 2000);
+    auto weather = std::make_shared<WeatherPage>();
+    Application::getInstance()->launchScreenPageDelayed(weather, 2000);
 }
 
-void NetworkConnectPage::OnNetworkConnectionListener::onDisconnected(const char *ssid) {
+void NetworkConnectPage::OnNetworkConnectionListener::onDisconnected(const std::string &ssid) {
     parent->textView->setText("disconnected");
 }

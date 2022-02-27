@@ -4,18 +4,19 @@
 
 #include "view_group.h"
 
-void ViewGroup::addView(View *view) {
+void ViewGroup::addView(std::shared_ptr<View> view) {
     this->childs.push_back(view);
 }
 
-void ViewGroup::addView(View *view, int index) {
-    std::list<View *>::iterator itr = this->childs.begin();
+void ViewGroup::addView(std::shared_ptr<View> view, int index) {
+    std::list<std::shared_ptr<View>>::iterator itr = this->childs.begin();
     this->childs.insert(itr, index, view);
 }
 
 void ViewGroup::onDraw(U8G2 *u8g2) {
-    for (View *v: this->childs) {
-        v->onDraw(u8g2);
+    for (std::shared_ptr<View> v: this->childs) {
+        auto view = v.get();
+        if (view) view->onDraw(u8g2);
     }
 }
 

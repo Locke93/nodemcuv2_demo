@@ -6,17 +6,18 @@
 #define NODEMCUV2_TEXT_VIEW_H
 
 #include "view/view.h"
+#include <string>
 
 class TextView : public View {
 private:
     const uint8_t *font = nullptr;
-    const char *text = nullptr;
+    std::string text = "";
 public:
     TextView() = default;
 
     void setFont(const uint8_t *font);
 
-    void setText(const char *text);
+    void setText(const std::string &text);
 
     void onDraw(U8G2 *u8g2) override;
 };
