@@ -62,34 +62,34 @@ std::pair<std::pair<int, int>, const uint8_t *> WeatherPage::getIconByCode(const
         return std::make_pair(std::make_pair(32, 32), weather_icon_0);
     }
     if (code == "1") {
-        return std::make_pair(std::make_pair(31, 32), weather_icon_1);
+        return std::make_pair(std::make_pair(32, 32), weather_icon_1);
     }
     if (code == "2") {
         return std::make_pair(std::make_pair(32, 32), weather_icon_2);
     }
     if (code == "3") {
-        return std::make_pair(std::make_pair(31, 32), weather_icon_3);
+        return std::make_pair(std::make_pair(32, 32), weather_icon_3);
     }
     if (code == "4") {
-        return std::make_pair(std::make_pair(41, 32), weather_icon_4);
+        return std::make_pair(std::make_pair(32, 32), weather_icon_4);
     }
     if (code == "5") {
-        return std::make_pair(std::make_pair(44, 32), weather_icon_5);
+        return std::make_pair(std::make_pair(32, 32), weather_icon_5);
     }
     if (code == "6") {
-        return std::make_pair(std::make_pair(38, 32), weather_icon_6);
+        return std::make_pair(std::make_pair(32, 32), weather_icon_6);
     }
     if (code == "7") {
-        return std::make_pair(std::make_pair(46, 32), weather_icon_7);
+        return std::make_pair(std::make_pair(32, 32), weather_icon_7);
     }
     if (code == "8") {
-        return std::make_pair(std::make_pair(37, 32), weather_icon_8);
+        return std::make_pair(std::make_pair(32, 32), weather_icon_8);
     }
     if (code == "9") {
         return std::make_pair(std::make_pair(48, 32), weather_icon_9);
     }
     if (code == "10") {
-        return std::make_pair(std::make_pair(33, 32), weather_icon_10);
+        return std::make_pair(std::make_pair(32, 32), weather_icon_10);
     }
     if (code == "11") {
         return std::make_pair(std::make_pair(32, 32), weather_icon_11);
@@ -179,10 +179,10 @@ std::pair<std::pair<int, int>, const uint8_t *> WeatherPage::getIconByCode(const
 }
 
 std::string WeatherPage::getValueFromJson(const std::string &json, const std::string &key) {
-    int begin = json.find(key + "\":\"");
+    auto begin = json.find(key + "\":\"");
     if (begin == std::string::npos) return "";
     begin += key.length() + 3;
-    int end = json.find("\"", begin);
+    auto end = json.find("\"", begin);
     if (end == std::string::npos || end <= begin) return "";
     return json.substr(begin, end - begin);
 }
