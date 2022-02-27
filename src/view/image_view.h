@@ -13,9 +13,6 @@ private:
     u8g2_uint_t height = 0;
     const uint8_t *bitmap = nullptr;
 public:
-    ImageView() = default;
-
-    ~ImageView();
 
     void setImage(u8g2_uint_t w, u8g2_uint_t h, const uint8_t *bitmap);
 

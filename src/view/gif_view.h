@@ -19,10 +19,6 @@ private:
     uint32_t drawTime = 0;
 public:
 
-    GifView() = default;
-
-    ~GifView();
-
     void setInterval(uint16_t t);
 
     void setImageSet(u8g2_uint_t w, u8g2_uint_t h, std::initializer_list<const uint8_t *> bitmaps);

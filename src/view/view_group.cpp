@@ -14,6 +14,7 @@ void ViewGroup::addView(std::shared_ptr<View> view, int index) {
 }
 
 void ViewGroup::onDraw(U8G2 *u8g2) {
+    if (this->childs.empty()) return;
     for (std::shared_ptr<View> v: this->childs) {
         auto view = v.get();
         if (view) view->onDraw(u8g2);
@@ -21,5 +22,6 @@ void ViewGroup::onDraw(U8G2 *u8g2) {
 }
 
 void ViewGroup::removeAllViews() {
+    if (this->childs.empty()) return;
     this->childs.clear();
 }

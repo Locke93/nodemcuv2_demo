@@ -13,7 +13,6 @@ private:
     const uint8_t *font = nullptr;
     std::string text = "";
 public:
-    TextView() = default;
 
     void setFont(const uint8_t *font);
 

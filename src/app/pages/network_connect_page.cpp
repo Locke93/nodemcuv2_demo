@@ -37,6 +37,10 @@ NetworkConnectPage::OnNetworkConnectionListener::OnNetworkConnectionListener(Net
     this->parent = parent;
 }
 
+NetworkConnectPage::OnNetworkConnectionListener::~OnNetworkConnectionListener() {
+    this->parent = nullptr;
+}
+
 void NetworkConnectPage::OnNetworkConnectionListener::onScan(std::vector<WifiEndpoint> endpoints) {
 }
 

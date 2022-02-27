@@ -38,6 +38,6 @@ void Application::launchScreenPageDelayed(std::shared_ptr<ScreenPage> page, long
     ticker.once_ms(delay, [this, page] {
         rootView->removeAllViews();
         page->onCreate(rootView);
-        //activePage = page;
+        activePage = page;
     });
 }

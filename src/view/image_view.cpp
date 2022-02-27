@@ -4,11 +4,6 @@
 
 #include "image_view.h"
 
-ImageView::~ImageView() {
-    if (!bitmap) return;
-    delete[] bitmap;
-}
-
 void ImageView::setImage(u8g2_uint_t w, u8g2_uint_t h, const uint8_t *bitmap) {
     this->width = w;
     this->height = h;

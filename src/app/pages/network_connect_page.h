@@ -15,6 +15,8 @@ class NetworkConnectPage : public ScreenPage {
     public:
         OnNetworkConnectionListener(NetworkConnectPage *parent);
 
+        ~OnNetworkConnectionListener();
+
     public:
         void onScan(std::vector<WifiEndpoint> endpoints) override;
 
@@ -26,8 +28,8 @@ class NetworkConnectPage : public ScreenPage {
         NetworkConnectPage *parent;
     };
 
-
 public:
+
     void onCreate() override;
 
 private:
